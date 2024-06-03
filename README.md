@@ -1,6 +1,6 @@
 # Final_Project
 
-**Fitness Progress Tracking System**
+Fitness Progress Tracking System
 
 ### Functionality
 
