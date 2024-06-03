@@ -1,6 +1,6 @@
-# Final_Project
+# Fitness Progress Tracking System
 
-## Fitness Progress Tracking System _ functionality:
+Functionality:
 
 •	**_Add Workouts_**: Users can add workout entries with details such as type, duration, calories burned, and date.
 
