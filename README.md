@@ -16,4 +16,3 @@ Functionality:
 
 •	**Read Data from File:** On startup, the application will read data from files to restore the user's previous state.
 
-•	**Error Handling:** The application will handle invalid inputs, incorrect data types, and other common errors gracefully.
