@@ -26,6 +26,23 @@ class User(Person):
         self.goal = goal
 
 
+class validators:
+    
+    @staticmethod
+    def number_validator(n, num_type):
+        is_number=False
+        try:
+            n=num_type(n)
+            is_number=True
+        except:
+            print('\nInvalid input! Please enter a numeric value.')
+        return is_number
+    
+    def user_validator(user, users):
+        return user in users
+        
+
+
 
 class Workout:
     def __init__(self, user, date, duration, calories_burned, type_, description, distance=0, reps=0, sets=0 ):
@@ -214,6 +231,7 @@ def main():
             
             tracker.add_workout(username, date, duration, calories_burned, type_, distance, reps, sets, description)
             print(tracker.workouts)
+            
         elif choice == '3':
             
             username = input("Enter username: ")
