@@ -137,12 +137,9 @@ class FitnessTracker:
         print(self.df_workouts[self.df_workouts['user']==username].iloc[:,1:].to_string(index=False))
 
     def set_goals(self, username, target_value, goal):
-        if username not in self.users:
-            print(f"User {username} does not exist.")
-        else:
-            self.users[username].target_value = target_value
-            self.users[username].goal = goal
-            print(f"Goal set for user {username}.")
+        self.users[username].target_value = target_value
+        self.users[username].goal = goal
+        print(f"Goal set for user {username}.")
 
     def track_progress(self, username):
         if username not in self.users:
@@ -282,3 +279,15 @@ updates = {field: input(f"Enter new value for {field}: ") for field in fields}
 for key, value in updates.items():
     print(key,value)
     
+import matplotlib.pyplot as plt
+
+# Sample data
+time = [1, 2, 3, 4, 5]
+duration = [30, 45, 50, 40, 55]
+
+# Plotting
+plt.plot(time, duration)
+plt.xlabel('Time')
+plt.ylabel('Duration')
+plt.title('Duration over Time')
+plt.show()
