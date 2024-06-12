@@ -34,13 +34,14 @@ def main():
     tracker.load_data()
     
     menu = {1: 'Create User', # +edit user info
-            2: 'Add Workout',  #აქ არ დაგავიწყდეს დაამატე, თუ იუზერი ემპტია
-            3: 'Edit Workout',
-            4: 'View Workouts',
-            5: 'Set Goals',
-            6: 'Track Progress',
-            7: 'Save Data to File',
-            8: 'Exit'}
+            2: 'Edit User Info',
+            3: 'Add Workout',  #აქ არ დაგავიწყდეს დაამატე, თუ იუზერი ემპტია
+            4: 'Edit Workout',
+            5: 'View Workouts',
+            6: 'Set Goals',
+            7: 'Track Progress',
+            8: 'Save Data to File',
+            9: 'Exit'}
     
 
     while True:
@@ -63,7 +64,22 @@ def main():
             #Creating new user
             tracker.create_user(name, age, weight, height)
                 
-        elif function == 2: #Add Workout
+        elif function == 2: #Edit user info
+            user = loops.user_loop('your username', validators.user_validator, tracker.users)
+            
+            while True:    
+                fields = input('Enter variable (comma separated, e.g., weight,height): ').split(',')
+                for field in fields:
+                    if field not in ['name', 'age', 'weight','height', 'goal']:
+                        print('\nInvalid variables provided! Please enter from these - [name, age, weight, height, goal]\n')
+                        break
+                else:
+                    break
+                
+            fields = input('Enter the fields to edit (comma separated, e.g., weight,height): ').split(',')
+            updates = {field: input(f'Enter new value for {field}: ') for field in fields}
+            
+        elif function == 3: #Add Workout
             
             user = loops.user_loop('your username', validators.user_validator, tracker.users) 
             date = loops.date_loop('workout date (in format dd/mm/yyyy)', validators.date_validator)
@@ -84,26 +100,35 @@ def main():
             
             tracker.add_workout(user, date, duration, calories_burned, type_, distance, reps, sets, description)
             
-        elif function == 3: #Edit Workout
+        elif function == 4: #Edit Workout
             user = loops.user_loop('your username', validators.user_validator, tracker.users) 
             date = loops.date_loop('workout date (in format dd/mm/yyyy)', validators.date_validator)
             description = input('Enter description: ')
-            fields = input('Enter the fields to edit (comma separated, e.g., duration,calories_burned): ').split(',')
+            
+            while True:    
+                fields = input('Enter variable (comma separated, e.g., duration,calories_burned): ').split(',')
+                for field in fields:
+                    if field not in ['date', 'duration', 'calories_burned','type', 'distance', 'reps', 'sets', 'description']:
+                        print('\nInvalid variables provided! Please enter from these - [date, duration, calories_burned, distance, reps, sets, description]\n')
+                        break
+                else:
+                    break
+                
             updates = {field: input(f'Enter new value for {field}: ') for field in fields}
             
             tracker.edit_workout(user, date, description, **updates)
             
-        elif function == 4: #View Workouts
+        elif function == 5: #View Workouts
             user = loops.user_loop('your username', validators.user_validator, tracker.users)
             tracker.view_workouts(user)
             
-        elif function == 5: #Set Goals
+        elif function == 6: #Set Goals
             user = loops.user_loop('your username', validators.user_validator, tracker.users)
             goal = loops.num_loop('goal (in kg)', validators.number_validator, float)
 
             tracker.set_goal(user, goal)
             
-        elif function == 6: #Track Progress
+        elif function == 7: #Track Progress
             user = loops.user_loop('your username', validators.user_validator, tracker.users)
             
             #makes sure type is correctly inputted
@@ -127,10 +152,10 @@ def main():
             #Displays and saves line chart of input variables
             tracker.track_progress(user, type_, variables)
             
-        elif function == 7: #Save Data to File
+        elif function == 8: #Save Data to File
             tracker.save_data()
             
-        elif function == 8: #Exit
+        elif function == 9: #Exit
             print('Saving data...')
             tracker.save_data() #Saving data even in case of exit
             print('Succesfully saved, exiting...\nGoodbye!')

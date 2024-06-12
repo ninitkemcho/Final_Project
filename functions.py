@@ -8,7 +8,7 @@ class Person:
     def __init__(self, name, age):
         self.name = name
         self.age = age
-    
+
     def to_dict(self):
         return {
             'name': self.name,
@@ -21,11 +21,33 @@ class Person:
 class User(Person):
     def __init__(self, name, age, weight, height, goal=None):
         super().__init__(name, age)
-        self.weight = weight
-        self.height = height
-        self.goal = goal
+        self.__weight = weight
+        self.__height = height
+        self.__goal = goal
+        self.__password = None
 
+    def get_weight(self):
+        return self.__weight
 
+    def set_weight(self, weight):
+        self.__weight = weight
+
+    def get_height(self):
+        return self.__height
+
+    def set_height(self, height):
+        self.__height = height
+
+    def get_goal(self):
+        return self.__goal
+
+    def set_goal(self, goal):
+        self.__goal = goal
+        
+    def set_password(self, password):
+        self.__password = password
+        
+        
 class validators:
     @staticmethod
     def number_validator(n, num_type):
@@ -98,11 +120,21 @@ class FitnessTracker:
         self.workouts = []
         self.df_workouts=pd.DataFrame(self.workouts)
         self.df_users=pd.DataFrame(self.users).T
-
+        
+        
+    def authenticate_user(self, username, password):
+        if validators.user_validator(username, self.users):
+            user = self.users[username]
+            if user.get_password() == password:
+                return True
+        return False    
+    
     #Generating unique username for each person
     def unique_username(self, name):
         while True:
+            #Creating name+ random 4-digit number combination as username
             username=name+''.join(random.choice('0123456789') for _ in range(4))
+            #Makes sure each username is unique
             if username in self.users:
                 continue
             else:
@@ -112,11 +144,16 @@ class FitnessTracker:
     #Adding user info in users dict
     def create_user(self,  name, age, weight, height):
         self.username=self.unique_username(name)
-        if self.username in self.users:
-            print(f"\nUser {self.username} already exists.")
-        else:
-            self.users[self.username] = User(name, age, weight, height).to_dict()
-            print(f"\nUser {self.username} created successfully.\n")
+        new_user=User(name, age, weight, height)
+        while True:     
+            password=input('Set a password for the new user: ')
+            if len(password)<8:
+                print('\nPassword length is less than 8.')
+            else:
+                break
+        new_user.set_password(password)    
+        self.users[self.username] = new_user.to_dict()
+        print(f"\nUser {self.username} created successfully.\n")
         self.df_users=pd.DataFrame(self.users).T
         return self.users
     
