@@ -2,6 +2,7 @@ import random
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+from pandas.errors import EmptyDataError
 
 
 class Person:
@@ -105,11 +106,10 @@ class FitnessTracker:
     def __init__(self):
         self.users = {}
         self.workouts = []
-        self.df_workouts = self.load_data()[0]
-        self.df_users = self.load_data()[1]
+        self.df_users, self.df_workouts = self.load_data()
               
     def authenticate_user(self, username, password):
-        if validators.user_validator(username, self.users) and self.users[username]['password']==password:
+        if username in self.df_users.index and self.df_users.at[username,'password']==password:
             return True
         return False    
     
@@ -153,8 +153,9 @@ class FitnessTracker:
     
     #Edits user info in case of mistake
     def edit_user_info(self, username, **kwargs):
-        for key,value in kwargs.items:
+        for key,value in kwargs.items():
             self.df_users.at[username,key] = value
+            print(f'Succesfully edited {key}')
     
     #Appending each workout dictionary in workout list            
     def add_workout(self, user, date, duration, calories_burned, type_, distance, reps, sets, description):
@@ -170,7 +171,7 @@ class FitnessTracker:
             print('\n',pd.DataFrame(RunWorkout(user, date, duration, calories_burned, description, distance).to_dict(), index=[0]).to_string(index=False))    
         
         #Appending new row to dataframe
-        self.df_workouts = self.df_workouts.append(self.workouts[-1])
+        self.df_workouts = self.df_workouts.append(self.workouts[-1], ignore_index=True)
     
         print(f"\nWorkout added for user {user}\n")
 
@@ -231,38 +232,38 @@ class FitnessTracker:
     def save_data(self, users_file="users.csv", workouts_file="workouts.csv"):
         
         ##If loaded data is not empty headers are saved
-        
+        self.df_users.to_csv(users_file)
         #Users data
-        if self.df_users.shape == (0,0):
-            self.df_users.to_csv(users_file, mode='a', header=True)
-        else:
-            self.df_users.to_csv(users_file, mode='a', header=False)
         print(f'Transformed data saved to {users_file}')
-        
+        self.df_workouts.to_csv(workouts_file)
         #Workouts data
-        if self.df_workouts.shape == (0,0):
-            self.df_workouts.to_csv(workouts_file, mode='a', header=True)
-        else:
-            self.df_workouts.to_csv(workouts_file, mode='a', header=False)
         print(f'Transformed data saved to {workouts_file}\n')
         
         
     def load_data(self, users_file="users.csv", workouts_file="workouts.csv"):
         
         try:
-            df_users = pd.read_csv(users_file)
-            print(f'Users data loaded from {users_file}\n')
+            df_users = pd.read_csv(users_file, index_col = [0])
+            print(f'Users data loaded from {users_file}')
         except FileNotFoundError:
-            print(f'File {users_file} not found\n')
-        except Exception as e:
-            print(f'An error occurred: {e}\n')
-
-        try:
-            df_workouts = pd.read_csv(workouts_file)
-            print(f'Workouts data loaded from {workouts_file}\n')
-        except FileNotFoundError:
-            print(f'File {workouts_file} not found.\n')
+            print(f'File {users_file} not found')
+        except EmptyDataError:
+            df_users = pd.DataFrame()
+            print(f'Empty dataframe generated for {users_file}')
         except Exception as e:
             print(f"An error occurred: {e}")
+            
+            
+        try:
+            df_workouts = pd.read_csv(workouts_file, index_col = [0])
+            print(f'Workouts data loaded from {workouts_file}')
+        except FileNotFoundError:
+            print(f'File {workouts_file} not found.')
+        except EmptyDataError:
+            df_workouts = pd.DataFrame() 
+            print(f'Empty dataframe generated for {workouts_file}')
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            
             
         return df_users, df_workouts

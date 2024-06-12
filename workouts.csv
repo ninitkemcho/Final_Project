@@ -1,1 +1,5 @@
-""
+,user,date,duration,calories_burned,type,distance,reps,sets,description
+0,nini1391,2024-06-10,90.0,200,cardio,0,0,0,swimming
+1,nini1391,2024-06-12 00:00:00,15.0,50,strength,0,12,4,leg press
+2,nini1391,2024-06-12 00:00:00,40.0,100,strength,0,20,5,squat
+3,niko5522,2024-06-12 00:00:00,30.0,50,strength,0,12,4,biceps

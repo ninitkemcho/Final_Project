@@ -31,7 +31,8 @@ class loops:
 def main():
     
     tracker = FitnessTracker()
-    tracker.load_data()
+    logged_in_user = None
+    #tracker.load_data()
     
     menu = {
             1: 'Edit User Info',  #from loaded df
@@ -40,8 +41,7 @@ def main():
             4: 'View Workouts',
             5: 'Set Goals',
             6: 'Track Progress',
-            7: 'Save Data to File',
-            8: 'Log out'
+            7: 'Log out'
             }
     
     #In both case user will be logged in automatically
@@ -69,6 +69,8 @@ def main():
                 username = input("Enter your username: ")
                 password = input("Enter your password: ")
                 if tracker.authenticate_user(username, password):
+                    logged_in_user = username
+                    print('Successful log in!\n')
                     break
                 else:
                     print("Incorrect username or password. Please try again.")
@@ -85,6 +87,7 @@ def main():
               
         #Exit
         elif function == 3:
+            tracker.save_data()
             print('Exiting...\nGoodbye\n')
             break
         
@@ -115,9 +118,10 @@ def main():
                     else:
                         break
                     
-                fields = input('Enter the fields to edit (comma separated, e.g., weight,height): ').split(',')
+                #fields = input('Enter the fields to edit (comma separated, e.g., weight,height): ').split(',')
                 updates = {field: input(f'Enter new value for {field}: ') for field in fields}
                 
+                tracker.edit_user_info(username, **updates)
                 #edit_user 
             
             #Add Workout
@@ -198,16 +202,9 @@ def main():
                 #Displays and saves line chart of input variables
                 tracker.track_progress(username, type_, variables)
                 
-            #Save Data to File
-            elif function == 7:
-                print('Saving data...')
-                tracker.save_data()
-                
             #Logout
-            elif function == 8: 
-                print('Saving data...')
-                tracker.save_data() #Saving data even in case of exit
-                print('Succesfully saved, exiting...\nGoodbye!')
+            elif function == 7: 
+                print('Logged out...\nGoodbye!\n')
                 break
             
             #Invalid choice
