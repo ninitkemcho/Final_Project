@@ -152,7 +152,7 @@ class FitnessTracker:
                     print(f'\n{key.capitalize()} successfully updated with {value}\n')
                     break
             elif workout == self.workouts[-1]:
-                print('\nNo changes have been made!')
+                print('\nNo changes have been made!\n')
                 
         self.df_workouts = pd.DataFrame(self.workouts)
         return self.workouts
