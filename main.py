@@ -1,4 +1,5 @@
 from functions import validators, FitnessTracker
+from datetime import datetime
 
 #Creating loop class for incorrect input values
 class loops:
@@ -74,7 +75,7 @@ def main():
                     break
                 else:
                     print("Incorrect username or password. Please try again.")
-                    
+            tracker.operations(username, datetime.now(), log[function], '')
         #Register +login
         elif function == 2:
             name = input('\nEnter your name: ')
@@ -84,7 +85,8 @@ def main():
         
             #Creating new user
             username = tracker.create_user(name, age, weight, height)
-              
+            tracker.operations(username, datetime.now(), log[function], '')
+        
         #Exit
         elif function == 3:
             tracker.save_data()
@@ -122,7 +124,7 @@ def main():
                 updates = {field: input(f'Enter new value for {field}: ') for field in fields}
                 
                 tracker.edit_user_info(username, **updates)
-                #edit_user 
+                tracker.operations(username, datetime.now(), menu[function], updates)
             
             #Add Workout
             elif function == 2: #Add Workout
@@ -145,7 +147,8 @@ def main():
                 description = input('Enter description: ')
                 
                 tracker.add_workout(username, date, duration, calories_burned, type_, distance, reps, sets, description)
-                
+                tracker.operations(username, datetime.now(), menu[function], tracker.workouts[-1])
+            
             #Edit Workout
             elif function == 3: #Edit Workout
                 #user = loops.user_loop('your username', validators.user_validator, tracker.users) 
@@ -164,19 +167,22 @@ def main():
                 updates = {field: input(f'Enter new value for {field}: ') for field in fields}
                 
                 tracker.edit_workout(username, date, description, **updates)
-                
+                tracker.operations(username, datetime.now(), menu[function], updates)
+            
             #View Workouts
             elif function == 4:
                 #user = loops.user_loop('your username', validators.user_validator, tracker.users)
                 tracker.view_workouts(username)
-                
+                tracker.operations(username, datetime.now(), menu[function], '')
+            
             #Set Goal
             elif function == 5: 
                 #user = loops.user_loop('your username', validators.user_validator, tracker.users)
                 goal = loops.num_loop('goal (in kg)', validators.number_validator, float)
     
                 tracker.set_goal(username, goal)
-                
+                tracker.operations(username, datetime.now(), menu[function], goal)
+            
             #Track Progress
             elif function == 6:
                 #user = loops.user_loop('your username', validators.user_validator, tracker.users)
@@ -201,10 +207,12 @@ def main():
                 
                 #Displays and saves line chart of input variables
                 tracker.track_progress(username, type_, variables)
-                
+                tracker.operations(username, datetime.now(), menu[function], type_,variables)
+            
             #Logout
             elif function == 7: 
                 print('Logged out...\nGoodbye!\n')
+                tracker.operations(username, datetime.now(), menu[function], '')
                 break
             
             #Invalid choice

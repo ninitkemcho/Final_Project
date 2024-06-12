@@ -106,13 +106,17 @@ class FitnessTracker:
     def __init__(self):
         self.users = {}
         self.workouts = []
-        self.df_users, self.df_workouts = self.load_data()
-              
+        self.df_users, self.df_workouts, self.df_operations = self.load_data()
+
     def authenticate_user(self, username, password):
         if username in self.df_users.index and self.df_users.at[username,'password']==password:
             return True
         return False    
     
+    def operations(self, username, time, operation, description):
+        self.df_operations = self.df_operations.append({'user': username, 'time': time, 'operation': operation, 'description': description}, ignore_index = True)
+        return self.df_operations
+        
     #Generating unique username for each person
     def unique_username(self, name):
         while True:
@@ -200,7 +204,7 @@ class FitnessTracker:
         
         #Filtering data for specific user
         user_data = self.df_workouts[(self.df_workouts['user']==username) & (self.df_workouts['type']==type_)]
-        user_data['date'] = pd.to_datetime(user_data['date'], format='%d/%m/%Y')
+        user_data['date'] = pd.to_datetime(user_data['date'], format='%Y/%m/%d')
         user_data = user_data.sort_values('date')
         grouped = user_data.groupby(by=['date']).sum(numeric_only=True) #Grouping numerical values for same date
         dates = grouped.index
@@ -213,7 +217,7 @@ class FitnessTracker:
             plt.plot(dates, values, marker='o', linestyle='-', label=variable.capitalize())
 
         plt.xticks(dates)
-        plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d/%m/%Y'))
+        plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y/%m/%d'))
         plt.xticks(rotation=0)
 
         #Indicating labels
@@ -229,19 +233,21 @@ class FitnessTracker:
         plt.show()
         
         
-    def save_data(self, users_file="users.csv", workouts_file="workouts.csv"):
+    def save_data(self, users_file="users.csv", workouts_file="workouts.csv", operations_file = 'operations.csv'):
         
-        ##If loaded data is not empty headers are saved
-        self.df_users.to_csv(users_file)
         #Users data
+        self.df_users.to_csv(users_file)
         print(f'Transformed data saved to {users_file}')
-        self.df_workouts.to_csv(workouts_file)
+        
         #Workouts data
+        self.df_workouts.to_csv(workouts_file)
         print(f'Transformed data saved to {workouts_file}\n')
         
+        #Operations data
+        self.df_operations.to_csv(operations_file)
         
-    def load_data(self, users_file="users.csv", workouts_file="workouts.csv"):
-        
+    def load_data(self, users_file="users.csv", workouts_file="workouts.csv", operations_file = 'operations.csv'):
+        #Users data
         try:
             df_users = pd.read_csv(users_file, index_col = [0])
             print(f'Users data loaded from {users_file}')
@@ -253,7 +259,7 @@ class FitnessTracker:
         except Exception as e:
             print(f"An error occurred: {e}")
             
-            
+        #Workouts data
         try:
             df_workouts = pd.read_csv(workouts_file, index_col = [0])
             print(f'Workouts data loaded from {workouts_file}')
@@ -265,5 +271,17 @@ class FitnessTracker:
         except Exception as e:
             print(f"An error occurred: {e}")
             
+        #Operations data
+        try:
+            df_operations = pd.read_csv(operations_file, index_col = [0])
+            print(f'Workouts data loaded from {operations_file}')
+        except FileNotFoundError:
+            print(f'File {operations_file} not found.')
+        except EmptyDataError:
+            df_operations = pd.DataFrame() 
+            print(f'Empty dataframe generated for {operations_file}')
+        except Exception as e:
+            print(f"An error occurred: {e}")
             
-        return df_users, df_workouts
+            
+        return df_users, df_workouts, df_operations
