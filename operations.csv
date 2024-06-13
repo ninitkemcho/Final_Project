@@ -1,3 +1,17 @@
 ,user,time,operation,description
 0,nini1391,2024-06-12 23:42:16.070102,Log in,
 1,nini1391,2024-06-12 23:42:20.046620,Log out,
+2,nini1391,2024-06-13 08:26:32.917823,Log in,
+3,nini1391,2024-06-13 08:30:35.965044,Add Workout,"{'user': 'nini1391', 'date': Timestamp('2024-06-13 00:00:00'), 'duration': 18.0, 'calories_burned': 50, 'type': 'strength', 'distance': 0, 'reps': 5, 'sets': 12, 'description': 'hip thrust'}"
+4,nini1391,2024-06-13 08:31:18.719004,Edit Workout,"{'reps': '12', 'sets': '4'}"
+5,nini1391,2024-06-13 08:31:56.122413,View Workouts,
+6,nini1391,2024-06-13 08:32:21.111719,Edit Workout,{'sets': '4'}
+7,nini1391,2024-06-13 08:34:34.867446,Edit Workout,"{'reps': '1', 'sets': '1'}"
+8,nini1391,2024-06-13 08:36:02.244671,Edit Workout,"{'reps': '1', 'sets': '1'}"
+9,nini1391,2024-06-13 08:37:21.165773,Edit Workout,"{'reps': '1', 'sets': '1'}"
+10,nini1391,2024-06-13 08:38:07.668501,Log out,
+11,nini1391,2024-06-13 08:49:51.588474,Log in,
+12,nini1391,2024-06-13 08:50:09.658740,Edit Workout,"{'reps': '1', 'sets': '1'},Failed"
+13,nini1391,2024-06-13 08:50:42.354530,Edit Workout,"{'reps': '15'},Failed"
+14,nini1391,2024-06-13 08:50:49.741734,View Workouts,
+15,nini1391,2024-06-13 08:51:21.223989,Log out,

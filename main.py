@@ -166,8 +166,8 @@ def main():
                     
                 updates = {field: input(f'Enter new value for {field}: ') for field in fields}
                 
-                tracker.edit_workout(username, date, description, **updates)
-                tracker.operations(username, datetime.now(), menu[function], updates)
+                edited = tracker.edit_workout(username, date, description, **updates)
+                tracker.operations(username, datetime.now(), menu[function], f"{updates},{('Successful' if edited == True else 'Failed')}")
             
             #View Workouts
             elif function == 4:

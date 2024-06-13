@@ -186,10 +186,12 @@ class FitnessTracker:
                 for key, value in kwargs.items():
                     self.df_workouts.at[index,key] = value
                     print(f'\n{key.capitalize()} successfully updated with {value}\n')
+                    return True
                     break
             elif index+1 == len(self.df_workouts):
                 print('\nNo changes have been made!\n')
-                
+                return False
+        
     
 
     def view_workouts(self, username):
@@ -274,7 +276,7 @@ class FitnessTracker:
         #Operations data
         try:
             df_operations = pd.read_csv(operations_file, index_col = [0])
-            print(f'Workouts data loaded from {operations_file}')
+            print(f'Operations data loaded from {operations_file}')
         except FileNotFoundError:
             print(f'File {operations_file} not found.')
         except EmptyDataError:
