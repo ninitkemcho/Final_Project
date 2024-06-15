@@ -32,8 +32,6 @@ class loops:
 def main():
     
     tracker = FitnessTracker()
-    logged_in_user = None
-    #tracker.load_data()
     
     menu = {
             1: 'Edit User Info',  #from loaded df
@@ -70,7 +68,6 @@ def main():
                 username = input("Enter your username: ")
                 password = input("Enter your password: ")
                 if tracker.authenticate_user(username, password):
-                    logged_in_user = username
                     print('Successful log in!\n')
                     break
                 else:
@@ -109,7 +106,6 @@ def main():
                   
             #Edit user info
             if function == 1: 
-                #user = loops.user_loop('your username', validators.user_validator, tracker.users)
                 
                 while True:    
                     fields = input('Enter variable (comma separated, e.g., weight,height): ').split(',')
@@ -129,7 +125,6 @@ def main():
             #Add Workout
             elif function == 2: #Add Workout
                 
-                #user = loops.user_loop('your username', validators.user_validator, tracker.users) 
                 date = loops.date_loop('workout date (in format dd/mm/yyyy)', validators.date_validator)
                 duration = loops.num_loop('workout duration (in minutes)', validators.number_validator, float)
                 calories_burned = loops.num_loop('calories you burned', validators.number_validator, int)
@@ -151,7 +146,6 @@ def main():
             
             #Edit Workout
             elif function == 3: #Edit Workout
-                #user = loops.user_loop('your username', validators.user_validator, tracker.users) 
                 date = loops.date_loop('workout date (in format dd/mm/yyyy)', validators.date_validator)
                 description = input('Enter description: ')
                 
@@ -171,13 +165,11 @@ def main():
             
             #View Workouts
             elif function == 4:
-                #user = loops.user_loop('your username', validators.user_validator, tracker.users)
                 tracker.view_workouts(username)
                 tracker.operations(username, datetime.now(), menu[function], '')
             
             #Set Goal
             elif function == 5: 
-                #user = loops.user_loop('your username', validators.user_validator, tracker.users)
                 goal = loops.num_loop('goal (in kg)', validators.number_validator, float)
     
                 tracker.set_goal(username, goal)
@@ -185,7 +177,6 @@ def main():
             
             #Track Progress
             elif function == 6:
-                #user = loops.user_loop('your username', validators.user_validator, tracker.users)
                 
                 #makes sure type is correctly inputted
                 while True:
