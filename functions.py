@@ -36,7 +36,6 @@ class User(Person):
         
         
 class validators:
-    @staticmethod
     def number_validator(n, num_type):
         is_number=False
         try:
@@ -247,6 +246,7 @@ class FitnessTracker:
         
         #Operations data
         self.df_operations.to_csv(operations_file)
+        print(f'Transformed data saved to {operations_file}\n')
         
     def load_data(self, users_file="users.csv", workouts_file="workouts.csv", operations_file = 'operations.csv'):
         #Users data
@@ -276,14 +276,14 @@ class FitnessTracker:
         #Operations data
         try:
             df_operations = pd.read_csv(operations_file, index_col = [0])
-            print(f'Operations data loaded from {operations_file}')
+            print(f'Operations data loaded from {operations_file}\n')
         except FileNotFoundError:
-            print(f'File {operations_file} not found.')
+            print(f'File {operations_file} not found.\n')
         except EmptyDataError:
             df_operations = pd.DataFrame() 
-            print(f'Empty dataframe generated for {operations_file}')
+            print(f'Empty dataframe generated for {operations_file}\n')
         except Exception as e:
-            print(f"An error occurred: {e}")
+            print(f"An error occurred: {e}\n")
             
             
         return df_users, df_workouts, df_operations

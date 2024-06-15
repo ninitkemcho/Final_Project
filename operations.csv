@@ -15,3 +15,13 @@
 13,nini1391,2024-06-13 08:50:42.354530,Edit Workout,"{'reps': '15'},Failed"
 14,nini1391,2024-06-13 08:50:49.741734,View Workouts,
 15,nini1391,2024-06-13 08:51:21.223989,Log out,
+16,nunu9231,2024-06-16 00:00:28.743190,Register,
+17,nunu9231,2024-06-16 00:00:48.979183,Set Goals,80.0
+18,nunu9231,2024-06-16 00:01:36.206236,Add Workout,"{'user': 'nunu9231', 'date': Timestamp('2024-06-16 00:00:00'), 'duration': 40.0, 'calories_burned': 100, 'type': 'cardio', 'distance': 0, 'reps': 0, 'sets': 0, 'description': 'walking'}"
+19,nunu9231,2024-06-16 00:02:18.269114,Edit User Info,"{'height': '165', 'weight': '91'}"
+20,nunu9231,2024-06-16 00:02:39.483772,View Workouts,
+21,nunu9231,2024-06-16 00:05:54.367973,Add Workout,"{'user': 'nunu9231', 'date': Timestamp('2024-06-17 00:00:00'), 'duration': 50.0, 'calories_burned': 100, 'type': 'cardio', 'distance': 0, 'reps': 0, 'sets': 0, 'description': 'walking'}"
+22,nunu9231,2024-06-16 00:07:23.374891,View Workouts,
+23,nunu9231,2024-06-16 00:07:35.079405,Set Goals,85.0
+24,nunu9231,2024-06-16 00:08:01.049564,Track Progress,"cardio-['duration', 'calories_burned', 'distance']"
+25,nunu9231,2024-06-16 00:08:07.452078,Log out,

@@ -207,7 +207,7 @@ def main():
                 
                 #Displays and saves line chart of input variables
                 tracker.track_progress(username, type_, variables)
-                tracker.operations(username, datetime.now(), menu[function], type_,variables)
+                tracker.operations(username, datetime.now(), menu[function], description=f'{type_}-{variables}')
             
             #Logout
             elif function == 7: 
