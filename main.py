@@ -48,7 +48,6 @@ def main():
            2: 'Register', #create_user 
            3: 'Exit'}
     
-    #Main big loop
     while True:
         
         #Printing menu for login
@@ -61,18 +60,22 @@ def main():
             is_valid, function = validators.number_validator(function, int)
             if is_valid:
                 break
-        
+            
         #Login    
         if function == 1:
-            while True:
-                username = input("Enter your username: ")
-                password = input("Enter your password: ")
-                if tracker.authenticate_user(username, password):
-                    print('Successful log in!\n')
-                    break
-                else:
-                    print("Incorrect username or password. Please try again.")
-            tracker.operations(username, datetime.now(), log[function], '')
+            if tracker.df_users.shape == (0,0):
+                print('\nNo users available\n')
+                continue
+            else:
+                while True:
+                    username = input("Enter your username: ")
+                    password = input("Enter your password: ")
+                    if tracker.authenticate_user(username, password):
+                        print('\nSuccessful log in!\n')
+                        break
+                    else:
+                        print("Incorrect username or password. Please try again.")
+                tracker.operations(username, datetime.now(), log[function], '')
         #Register +login
         elif function == 2:
             name = input('\nEnter your name: ')
@@ -136,7 +139,7 @@ def main():
                     else:
                         break
                     
-                distance = loops.num_loop('distance (if applicable, else 0)', validators.number_validator, float)
+                distance = loops.num_loop('distance in km (if applicable, else 0)', validators.number_validator, float)
                 reps = loops.num_loop('reps (if applicable, else 0)', validators.number_validator, int)
                 sets = loops.num_loop('sets (if applicable, else 0)', validators.number_validator, int)
                 description = input('Enter description: ')

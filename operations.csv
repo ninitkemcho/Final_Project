@@ -1,27 +1,17 @@
 ,user,time,operation,description
-0,nini1391,2024-06-12 23:42:16.070102,Log in,
-1,nini1391,2024-06-12 23:42:20.046620,Log out,
-2,nini1391,2024-06-13 08:26:32.917823,Log in,
-3,nini1391,2024-06-13 08:30:35.965044,Add Workout,"{'user': 'nini1391', 'date': Timestamp('2024-06-13 00:00:00'), 'duration': 18.0, 'calories_burned': 50, 'type': 'strength', 'distance': 0, 'reps': 5, 'sets': 12, 'description': 'hip thrust'}"
-4,nini1391,2024-06-13 08:31:18.719004,Edit Workout,"{'reps': '12', 'sets': '4'}"
-5,nini1391,2024-06-13 08:31:56.122413,View Workouts,
-6,nini1391,2024-06-13 08:32:21.111719,Edit Workout,{'sets': '4'}
-7,nini1391,2024-06-13 08:34:34.867446,Edit Workout,"{'reps': '1', 'sets': '1'}"
-8,nini1391,2024-06-13 08:36:02.244671,Edit Workout,"{'reps': '1', 'sets': '1'}"
-9,nini1391,2024-06-13 08:37:21.165773,Edit Workout,"{'reps': '1', 'sets': '1'}"
-10,nini1391,2024-06-13 08:38:07.668501,Log out,
-11,nini1391,2024-06-13 08:49:51.588474,Log in,
-12,nini1391,2024-06-13 08:50:09.658740,Edit Workout,"{'reps': '1', 'sets': '1'},Failed"
-13,nini1391,2024-06-13 08:50:42.354530,Edit Workout,"{'reps': '15'},Failed"
-14,nini1391,2024-06-13 08:50:49.741734,View Workouts,
-15,nini1391,2024-06-13 08:51:21.223989,Log out,
-16,nunu9231,2024-06-16 00:00:28.743190,Register,
-17,nunu9231,2024-06-16 00:00:48.979183,Set Goals,80.0
-18,nunu9231,2024-06-16 00:01:36.206236,Add Workout,"{'user': 'nunu9231', 'date': Timestamp('2024-06-16 00:00:00'), 'duration': 40.0, 'calories_burned': 100, 'type': 'cardio', 'distance': 0, 'reps': 0, 'sets': 0, 'description': 'walking'}"
-19,nunu9231,2024-06-16 00:02:18.269114,Edit User Info,"{'height': '165', 'weight': '91'}"
-20,nunu9231,2024-06-16 00:02:39.483772,View Workouts,
-21,nunu9231,2024-06-16 00:05:54.367973,Add Workout,"{'user': 'nunu9231', 'date': Timestamp('2024-06-17 00:00:00'), 'duration': 50.0, 'calories_burned': 100, 'type': 'cardio', 'distance': 0, 'reps': 0, 'sets': 0, 'description': 'walking'}"
-22,nunu9231,2024-06-16 00:07:23.374891,View Workouts,
-23,nunu9231,2024-06-16 00:07:35.079405,Set Goals,85.0
-24,nunu9231,2024-06-16 00:08:01.049564,Track Progress,"cardio-['duration', 'calories_burned', 'distance']"
-25,nunu9231,2024-06-16 00:08:07.452078,Log out,
+0,nini0861,2024-06-17 01:07:07.103225,Register,
+1,nini0861,2024-06-17 01:07:30.183104,Edit User Info,"{'weight': '55', 'height': '173'}"
+2,nini0861,2024-06-17 01:08:47.193668,Add Workout,"{'user': 'nini0861', 'date': Timestamp('2024-06-17 00:00:00'), 'duration': 90.0, 'calories_burned': 200, 'type': 'cardio', 'distance': 0, 'reps': 0, 'sets': 0, 'description': 'cycling'}"
+3,nini0861,2024-06-17 01:10:08.377399,Add Workout,"{'user': 'nini0861', 'date': Timestamp('2024-06-14 00:00:00'), 'duration': 20.0, 'calories_burned': 50, 'type': 'strength', 'distance': 0, 'reps': 15, 'sets': 4, 'description': 'leg press'}"
+4,nini0861,2024-06-17 01:10:34.330504,Add Workout,"{'user': 'nini0861', 'date': Timestamp('2024-06-14 00:00:00'), 'duration': 15.0, 'calories_burned': 40, 'type': 'strength', 'distance': 0, 'reps': 12, 'sets': 4, 'description': 'seated leg curl'}"
+5,nini0861,2024-06-17 01:11:31.064719,Add Workout,"{'user': 'nini0861', 'date': Timestamp('2024-06-14 00:00:00'), 'duration': 30.0, 'calories_burned': 30, 'type': 'strength', 'distance': 0, 'reps': 12, 'sets': 4, 'description': 'abductor/adductor'}"
+6,nini0861,2024-06-17 01:11:38.942672,View Workouts,
+7,nini0861,2024-06-17 01:12:18.851603,Add Workout,"{'user': 'nini0861', 'date': Timestamp('2024-06-11 00:00:00'), 'duration': 60.0, 'calories_burned': 100, 'type': 'strength', 'distance': 0, 'reps': 15, 'sets': 4, 'description': 'lower body'}"
+8,nini0861,2024-06-17 01:13:52.511678,Add Workout,"{'user': 'nini0861', 'date': Timestamp('2024-06-03 00:00:00'), 'duration': 20.0, 'calories_burned': 30, 'type': 'strength', 'distance': 0, 'reps': 12, 'sets': 4, 'description': 'hip thrust'}"
+9,nini0861,2024-06-17 01:15:21.126572,Add Workout,"{'user': 'nini0861', 'date': Timestamp('2024-06-03 00:00:00'), 'duration': 20.0, 'calories_burned': 50, 'type': 'strength', 'distance': 0, 'reps': 12, 'sets': 4, 'description': 'walking lunges'}"
+10,nini0861,2024-06-17 01:15:31.253283,Log out,
+11,nini0861,2024-06-17 01:17:45.178181,Log in,
+12,nini0861,2024-06-17 01:18:50.604744,Edit Workout,"{'reps': '10'},Successful"
+13,nini0861,2024-06-17 01:18:55.676739,View Workouts,
+14,nini0861,2024-06-17 01:19:46.527481,Set Goals,58.0
+15,nini0861,2024-06-17 01:19:55.504463,Log out,

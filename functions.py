@@ -113,7 +113,8 @@ class FitnessTracker:
         return False    
     
     def operations(self, username, time, operation, description):
-        self.df_operations = self.df_operations.append({'user': username, 'time': time, 'operation': operation, 'description': description}, ignore_index = True)
+        dict_ = {'user': username, 'time': time, 'operation': operation, 'description': description}
+        self.df_operations = pd.concat([self.df_operations, pd.DataFrame([dict_])], ignore_index = True)
         return self.df_operations
         
     #Generating unique username for each person
@@ -174,23 +175,33 @@ class FitnessTracker:
             print('\n',pd.DataFrame(RunWorkout(user, date, duration, calories_burned, description, distance).to_dict(), index=[0]).to_string(index=False))    
         
         #Appending new row to dataframe
-        self.df_workouts = self.df_workouts.append(self.workouts[-1], ignore_index=True)
+        self.df_workouts = pd.concat([self.df_workouts,pd.DataFrame([self.workouts[-1]])], ignore_index = True)
     
         print(f"\nWorkout added for user {user}\n")
 
     def edit_workout(self, username, date, description, **kwargs):
         
+        changes_made = False
+        
+        # Ensure date is in datetime format for comparison
+        date = pd.to_datetime(date, dayfirst=True).normalize()
+        
         for index, row in self.df_workouts.iterrows():
-            if row['user'] == username and row['date'] == date and row['description'] == description:
+            # Convert row date to datetime for accurate comparison
+            row_date = pd.to_datetime(row['date'], dayfirst=True).normalize()
+            
+            if row['user'] == username and row_date == date and row['description'] == description:
                 for key, value in kwargs.items():
                     self.df_workouts.at[index,key] = value
-                    print(f'\n{key.capitalize()} successfully updated with {value}\n')
-                    return True
-                    break
-            elif index+1 == len(self.df_workouts):
-                print('\nNo changes have been made!\n')
-                return False
+                    print(f'\n{key.capitalize()} successfully updated with {value}')
+                changes_made = True
+                break
+                
+        if not changes_made:
+            print('\nNo changes have been made!\n')
         
+        return changes_made
+
     
 
     def view_workouts(self, username):
@@ -242,7 +253,7 @@ class FitnessTracker:
         
         #Workouts data
         self.df_workouts.to_csv(workouts_file)
-        print(f'Transformed data saved to {workouts_file}\n')
+        print(f'Transformed data saved to {workouts_file}')
         
         #Operations data
         self.df_operations.to_csv(operations_file)
